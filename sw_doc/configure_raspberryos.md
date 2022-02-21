@@ -6,7 +6,7 @@ This guide assumes you are using a current (as of 2022) Raspberry Pi OS version 
 
 The instructions should work on other distirbutions that also follow the Raspberry OS boot procedure provding a similarly recent kernel.
 
-Many things involving editing `config.txt` file on the boot partition to extend the device tree. The device tree is the structre that tells the Linux kernel which hardware is available. As the boot partiton is a FAT aprtition you can make these modifcations easily even on Windows or OS X after [flashing the operating system](https://www.raspberrypi.com/software/), before booting the first time
+Before booting the first time the OS on the device, you have to modify the `config.txt` file on the boot partition to extend the device tree. The device tree is the structre that tells the Linux kernel which hardware is available. As the boot partiton is a FAT partition you can make these modifcations easily even on Windows or OS X after [flashing the operating system](https://www.raspberrypi.com/software/), before booting the first time.
 
 ## General settings
 Make sure you have the following entries in you `config.txt`
@@ -71,13 +71,13 @@ For more information on the supported commands check [general information](https
 If you want to use the OBD port, we recommend increasing the default baudrate. See the programming manual for details. You can also (mis)-use the OBD connection as general CAN sniffer, but there are performance limitations. See the [KUKSA.val DBC feeder documentation](https://github.com/eclipse/kuksa.val/tree/master/kuksa_feeders/dbc2val#elmobdlink-support) for details. Generally we recommend using the real CAN ports for CAN access, and use the STN2120 for OBD access only.
 
 ## Realtime Clock
-CANOPi contains an RTC, which means the board can keep time even when powered of. This is important because most cryptogrpahic protocols break if a system comes back of with a wrong time.
+CANOPi contains an RTC, which means the board can keep time even when powered of. This is important because most cryptogrpahic protocols break if a system comes back with a wrong time.
 
 To use the RTC uncomment/add the following lines to `config.txt`
 
 ```
 dtparam=i2c_vc=on
-dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi ,addr=0x51
+dtoverlay=i2c-rtc,pcf85063a,i2c_csi_dsi,addr=0x51
 ```
 
 Reboot and type 
